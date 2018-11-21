@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  docker-compose-build:
+    image: docker-compose-build
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n
+      # JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y Para java < 8 "Porta Tomcat"
+    ports:
+      - 8080:8080
+      - 5005:5005
