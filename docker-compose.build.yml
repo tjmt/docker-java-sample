@@ -1,11 +1,13 @@
 
-# docker-compose -f docker-compose.build.yml build --no-cache
+# NO_TEST=true docker-compose -f docker-compose.build.yml build --no-cache
 # docker-compose -f docker-compose.build.yml push
 # docker-compose -f docker-compose.build.yml down --rmi all -v --remove-orphans
 version: "3.5"
 services:
   tjmt.docker.java.sample:
-    image: ${DOCKER_REGISTRY}docker.java.samples${TAG}
+    image: ${DOCKER_REGISTRY}docker.java.sample${TAG}
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        SKIP_TEST: ${NO_TEST} # NO_TEST=true to skip NO_TEST=false to execute
